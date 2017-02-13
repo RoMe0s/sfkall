@@ -1,0 +1,12 @@
+auth:
+    resource: "@AuthBundle/Resources/config/routing.yml"
+    prefix:   /
+
+front:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   admin
+    options: { i18n: false }

@@ -1,0 +1,4 @@
+services:
+    auth.form_login_authenticator:
+        class: AuthBundle\Security\FormLoginAuthenticator
+        arguments: ["@router", "@security.password_encoder"]

@@ -1,0 +1,29 @@
+<div class="table-responsive">
+    <table class="table table-striped dataTables" >
+        <thead>
+        <tr>
+            {% for field in fields %}
+                <th>{{ field|trans }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in list %}
+            <tr>
+            {% for field in fields %}
+                <td>
+                    {{ item[field]|raw }}
+                </td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+{#        <tfoot>
+        <tr>
+            {% for field in fields %}
+                <th>{{ field|trans }}</th>
+            {% endfor %}
+        </tr>
+        </tfoot>#}
+    </table>
+</div>

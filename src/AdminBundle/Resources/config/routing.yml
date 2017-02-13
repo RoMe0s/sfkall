@@ -1,0 +1,27 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Default:index }
+
+pages:
+    path:     /pages
+    defaults: { _controller: AdminBundle:Page:index }
+
+page.edit:
+    path:     /pages/{id}/edit
+    defaults: { _controller: AdminBundle:Page:edit }
+
+page.update:
+    path:     /pages/{id}/update
+    defaults: { _controller: AdminBundle:Page:update }
+    requirements:
+        _method: GET
+
+page.create:
+    path:     /pages/create
+    defaults: { _controller: AdminBundle:Page:create }
+
+page.store:
+    path:     /pages/store
+    defaults: { _controller: AdminBundle:Page:store }
+    requirements:
+        _method: GET
