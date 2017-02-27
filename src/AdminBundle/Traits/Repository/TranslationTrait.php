@@ -1,16 +1,36 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: rome0s
+ * Date: 27.02.17
+ * Time: 17:27
+ */
+
 namespace AdminBundle\Traits\Repository;
 
-trait TranslationTrait { //need Basic Trait
 
-	public function joinTranslations($table, $locale) {
+trait TranslationTrait
+{
 
-		$this->query = $this->query
-		->leftJoin($table . '.translations', 'translation')
-		->where('translation.locale = :locale')
-		->setParameter('locale', $locale);
+    public function joinTranslations($locale, $use_default_locale = false) {
 
-		return $this;
-	}
+        $this->query->setHint(
+            \Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER,
+            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+        )
+            // locale
+        ->setHint(
+             \Gedmo\Translatable\TranslatableListener::HINT_TRANSLATABLE_LOCALE,
+             $locale
+        )
+            // fallback
+        ->setHint(
+             \Gedmo\Translatable\TranslatableListener::HINT_FALLBACK,
+             $use_default_locale
+        );
+
+        return $this;
+
+    }
 
 }

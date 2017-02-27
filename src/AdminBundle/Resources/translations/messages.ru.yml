@@ -5,4 +5,7 @@ actions: Действия
 id: ID
 Pages: Страницы
 title: Заголовок
-Log out: Выход
+Log out: Выход,
+status.no: Выключен
+status.yes: Включен
+status: Статус

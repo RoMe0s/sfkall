@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             //end localization,
             new AppBundle\AppBundle(),
             new AuthBundle\AuthBundle(),
+            //translatable
+            new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

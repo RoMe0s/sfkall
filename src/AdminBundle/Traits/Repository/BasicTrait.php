@@ -38,11 +38,9 @@ trait BasicTrait
     }
 
     public function render() {
-        return $this->query->getQuery();
-    }
+        $this->query = $this->query->getQuery();
 
-    public function result() {
-        return $this->query->getQuery()->getResult();
+        return $this;
     }
 
 }

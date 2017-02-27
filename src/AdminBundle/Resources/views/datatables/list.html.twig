@@ -12,7 +12,7 @@
             <tr>
             {% for field in fields %}
                 <td>
-                    {{ item[field]|raw }}
+                    {{ attribute(item, field)|raw }}
                 </td>
             {% endfor %}
             </tr>

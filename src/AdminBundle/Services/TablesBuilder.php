@@ -33,11 +33,11 @@ class TablesBuilder
         return $this;
     }
 
-    public function of($list) {
+    public function of($list, $fields) {
         
         $this->list = $list;
 
-        $this->fields = array_keys(array_pop($list));
+        $this->fields = $fields;
 
         return $this;
 
@@ -78,11 +78,11 @@ class TablesBuilder
 
             if(is_callable($content)) {
 
-                $item[$field] = $content($item);
+                $item->{'set' . $field}($content($item));
 
             } else {
 
-                $item[$field] = $content;
+                $item->{'set' . $field}($content);
 
             }
 
@@ -92,20 +92,15 @@ class TablesBuilder
 
             if(is_callable($content)) {
 
-                $item[$field] = $content($item);
+                $item->{$field} = $content($item);
 
             } else {
 
-                $item[$field] = $content;
+                $item->{$field} = $content;
 
             }
 
         }
-
-        return $item;
-    }
-
-    private function _add($item) {
 
         return $item;
     }

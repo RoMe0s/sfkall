@@ -4,7 +4,7 @@ namespace AdminBundle\Repository;
 
 use AdminBundle\Traits\Repository\BasicTrait;
 use AdminBundle\Traits\Repository\TranslationTrait;
-use Doctrine\ORM\Mapping;
+use Gedmo\Translatable\TranslatableListener;
 
 /**
  * PageRepository
@@ -17,12 +17,12 @@ class PageRepository extends \Doctrine\ORM\EntityRepository
     use BasicTrait;
     use TranslationTrait;
 
-    public function getFullList($table, $locale, $fields) {
-        return $this->init($table)
-            ->joinTranslations($table, $locale)
+    public function getFullList($table, $locale, $use_default_locale = false) {
+        return $this
+            ->init($table)
+            ->render()
+            ->joinTranslations($locale, $use_default_locale)
             ->query()
-            ->select($fields)
-            ->getQuery()
             ->getResult();
     }
 

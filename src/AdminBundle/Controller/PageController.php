@@ -3,9 +3,8 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Page;
+use AdminBundle\Form\PageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
@@ -15,11 +14,12 @@ class PageController extends Controller
 
     public function indexAction(Request $request)
     {
+
         $repository = $this->getDoctrine()->getRepository(Page::class);
 
         $data = $repository->getFullList(
             'page',
-            $request->getLocale(), array('page.id', 'translation.title', 'page.slug', 'page.template')
+            $request->getLocale()
         );
 
         $tb = $this->get('tables_builder');
@@ -27,9 +27,12 @@ class PageController extends Controller
         $translator = $this->get('translator');
 
         $list = $tb
-        ->of($data)
+        ->of($data, array('slug', 'title', 'template'))
+        ->edit('title', function($model) use ($translator) {
+              return $model->getTitle() === null ? $translator->trans('no') : $model->getTitle();
+        })
         ->edit('template', function ($model) use ($translator) {
-            return $model['template'] ? $model['template'] : $translator->trans('no');
+            return $model->getTemplate() ? $model->getTemplate : $translator->trans('no');
         })
         ->add('actions', function ($model) {
             return $this->renderView('AdminBundle:datatables:controls.html.twig',
@@ -59,17 +62,21 @@ class PageController extends Controller
 
         $page = new Page();
 
-        $form = $this->createFormBuilder($page)
-            ->add('slug', TextType::class)
-            ->add('apply', SubmitType::class)
-            ->add('save', SubmitType::class)
-            ->getForm();
+        $form = $this->createForm(PageType::class, $page);
 
         $form->handleRequest($request);
 
+//        dump($page); die;
+
         if($form->isSubmitted() && $form->isValid()) {
 
-            dump($form->isValid()); die;
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($page);
+
+            $em->flush();
+
+            return $this->redirectToRoute('pages');
 
         }
 
@@ -80,7 +87,7 @@ class PageController extends Controller
 
     public function storeAction(Request $request)
     {
-        $page = new Page();
+//        $page = new Page();
 
         dump($request->request->all()); die;
 
