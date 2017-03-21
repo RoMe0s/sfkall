@@ -10,37 +10,38 @@ trait BasicTrait
 {
     private $query;
 
+    private $table = null;
+
     /**
-     * @param string $table
+     * @return $this
      */
-    public function init($table) {
-        $this->query = $this->createQueryBuilder($table);
+    public function init() {
+
+        $this->table = $this->getClassMetadata($this->getEntityName())->getTableName();
+
+        $this->query = $this->createQueryBuilder($this->table);
 
         return $this;
     }
 
     /**
-    *
-    * @param boolean $status
-    * @param string $field
-    *
-    */
+     * @param bool $status
+     * @param string $field
+     * @return $this
+     */
     public function visible($status = true, $field = 'status') {
         $this->query = $this->query
-            ->where($field . "=$status")
+            ->where("$field=:status")
             ->setParameter('status', $status);
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function query() {
         return $this->query;
-    }
-
-    public function render() {
-        $this->query = $this->query->getQuery();
-
-        return $this;
     }
 
 }

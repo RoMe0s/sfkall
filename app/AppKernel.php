@@ -15,15 +15,18 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new AppBundle\AppBundle(),
+            new AuthBundle\AuthBundle(),
             new AdminBundle\AdminBundle(),
+            new WidgetBundle\WidgetBundle(),
             //localization
             new \JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new \JMS\TranslationBundle\JMSTranslationBundle(),
             //end localization,
-            new AppBundle\AppBundle(),
-            new AuthBundle\AuthBundle(),
             //translatable
-            new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle()
+            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+            new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
+            //end translatable,
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

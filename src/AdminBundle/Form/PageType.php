@@ -1,17 +1,19 @@
 <?php
 
 namespace AdminBundle\Form;
-
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 
 class PageType extends AbstractType
 {
+
     /**
      * {@inheritdoc}
      */
@@ -20,36 +22,90 @@ class PageType extends AbstractType
         $builder
             ->add('slug', TextType::class, [
                 'label' => 'slug',
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'slug'
+                    'placeholder' => 'slug',
                 ]
             ])
             ->add('status', ChoiceType::class,[
                 'placeholder' => 'status',
+                'required' => false,
                 'choices' => [
                     'status.no' => false,
                     'status.yes' => true
                 ],
-                'required' => true,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'chosen-select form-control'
                 ]
             ])
             ->add('template', ChoiceType::class, [
-                'required' => true,
-                'choices' => [
-                    'template.default' => 'template.default'
-                ],
                 'placeholder' => 'template',
+                'choices' => $options['templates'],
+                'required' => false,
+                'attr' => [
+                    'class' => 'chosen-select form-control'
+                ]
+            ])
+            ->add('parent_id', ChoiceType::class, [
+                'placeholder' => 'parent',
+                'choices' => $options['parents'],
+                'required' => false,
+                'attr' => [
+                    'class' => 'chosen-select form-control'
+                ]
+            ])
+            ->add('image', FileType::class, [
+                'label' => 'image',
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             ->add('apply', SubmitType::class)
-            ->add('save', SubmitType::class);
-
+            ->add('save', SubmitType::class)
+            ->add('translations', TranslationsType::class,[
+                'fields' => [
+                    'title' => [
+                        'label' => 'title',
+                        'attr' => [
+                            'placeholder' => 'title',
+                            'class' => 'form-control'
+                        ]
+                    ],
+                    'description' => [
+                        'label' => 'description',
+                        'attr' => [
+                            'placeholder' => 'description',
+                            'class' => 'form-control'
+                        ]
+                    ],
+                    'meta_title' => [
+                        'label' => 'meta_title',
+                        'attr' => [
+                            'placeholder' => 'meta_title',
+                            'class' => 'form-control'
+                        ]
+                    ],
+                    'meta_description' => [
+                        'label' => 'meta_description',
+                        'attr' => [
+                            'placeholder' => 'meta_description',
+                            'class' => 'form-control'
+                        ]
+                    ],
+                    'meta_keywords' => [
+                        'label' => 'meta_keywords',
+                        'attr' => [
+                            'placeholder' => 'meta_keywords',
+                            'class' => 'form-control'
+                        ]
+                    ],
+                    'content' => [
+                        'field_type' => HiddenType::class
+                    ]
+                ]
+            ]);
 
     }
     
@@ -59,7 +115,10 @@ class PageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AdminBundle\Entity\Page'
+            'data_class' => 'AdminBundle\Entity\Page',
+            'cascade_validation' => true,
+            'templates' => array(),
+            'parents' => array()
         ));
     }
 

@@ -27,4 +27,29 @@
 
         });
     </script>
+        <script>
+            $(document).ready(function(){
+
+                $("#form-checker").find('form').on('submit', function(e){
+                    var _firstErr = null;
+                    $(this).find('div.required').each(function() {
+                       if($(this).find('.form-control').val().length == 0) {
+                           _firstErr = _firstErr == null ? $(this).find('.form-control') : _firstErr;
+                           $(this).addClass('has-error');
+                       }
+                    });
+                    if(_firstErr != null) {
+                        _firstErr.focus();
+                        _firstErr.closest('.tabs-container').find('.nav-tabs').find('li.active').addClass('tab-with-error');
+                        return e.preventDefault();
+                    }
+                });
+
+                $(document).on("click", ".form-group.has-error .form-control", function(e) {
+                    $(this).closest("div.form-group").removeClass("has-error");
+                    $(this).closest('.tabs-container').find('.nav-tabs').find('li.tab-with-error').removeClass('tab-with-error');
+                });
+
+            });
+        </script>
 {% endblock %}

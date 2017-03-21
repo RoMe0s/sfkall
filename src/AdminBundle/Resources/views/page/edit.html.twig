@@ -1,7 +1,33 @@
-{% extends '@AdminBundle/Resources/views/layouts/list.html.twig' %}
-
-{% block title %}AdminBundle:Page:edit{% endblock %}
+{% extends '@AdminBundle/Resources/views/layouts/edit.html.twig' %}
 
 {% block body %}
-<h1>Welcome to the Page:edit page</h1>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{ 'page edit'|trans }}</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_homepage') }}">{{ 'home'|trans }}</a>
+                </li>
+                <li class="active">
+                    <strong>{{ 'page edit'|trans }}</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+
+        <div class="row">
+            <div class="col-lg-12 ibox" id="form-checker">
+
+                {{ form_start(form) }}
+
+                    {% include '@AdminBundle/Resources/views/page/controls/form.html.twig' %}
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+
+    </div>
 {% endblock %}

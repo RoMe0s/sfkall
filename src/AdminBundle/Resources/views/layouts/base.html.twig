@@ -11,10 +11,12 @@
     {% block stylesheets %}
         <link href="{{ asset('bundles/admin/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('bundles/admin/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-
+        <link href="{{ asset('bundles/admin/css/plugins/chosen/chosen.css') }}" rel="stylesheet">
         <link href="{{ asset('bundles/admin/css/animate.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/admin/css/style.css') }}" rel="stylesheet">
     {% endblock %}
+
+    <link href="{{ asset('bundles/admin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/admin/css/custom.css') }}" rel="stylesheet">
 
 </head>
 
@@ -38,7 +40,7 @@
     <script src="{{ asset('bundles/admin/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bundles/admin/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
     <script src="{{ asset('bundles/admin/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-
+    <script src="{{ asset('bundles/admin/js/plugins/chosen/chosen.jquery.js') }}"></script>
     <!-- Custom and plugin javascript -->
     <script src="{{ asset('bundles/admin/js/inspinia.js') }}"></script>
     <script src="{{ asset('bundles/admin/js/plugins/pace/pace.min.js') }}"></script>

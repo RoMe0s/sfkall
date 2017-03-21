@@ -3,8 +3,6 @@
 namespace AdminBundle\Repository;
 
 use AdminBundle\Traits\Repository\BasicTrait;
-use AdminBundle\Traits\Repository\TranslationTrait;
-use Gedmo\Translatable\TranslatableListener;
 
 /**
  * PageRepository
@@ -14,16 +12,39 @@ use Gedmo\Translatable\TranslatableListener;
  */
 class PageRepository extends \Doctrine\ORM\EntityRepository
 {
-    use BasicTrait;
-    use TranslationTrait;
 
-    public function getFullList($table, $locale, $use_default_locale = false) {
+    use BasicTrait;
+
+    /**
+     * @param $locale
+     * @return mixed
+     */
+    public function getFullList($locale) {
         return $this
-            ->init($table)
-            ->render()
-            ->joinTranslations($locale, $use_default_locale)
+            ->init()
             ->query()
+            ->leftJoin($this->table.'.translations', 'translations', 'WITH', 'translations.locale = :locale')
+            ->setParameter('locale', $locale)
+            ->addSelect('translations')
+            ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function findWithTranslations($id) {
+        return $this
+            ->init()
+            ->query()
+            ->leftJoin($this->table.'.translations', 'translations')
+            ->addSelect('translations')
+            ->where($this->table.'.id=:id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
     }
 
 }

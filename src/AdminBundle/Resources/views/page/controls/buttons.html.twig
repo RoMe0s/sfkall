@@ -1,4 +1,9 @@
-<div class="ibox-footer text-right">
-    {{ form_widget(form.apply, { 'label' : 'apply'|trans, 'attr' : {'class': 'btn btn-lg btn-primary'} } ) }}
-    {{ form_widget(form.save, { 'label' : 'save'|trans, 'attr' : {'class': 'btn btn-lg btn-success'} } ) }}
+<div class="ibox-footer clearfix">
+    <div class="pull-left text-left col-sm-2">
+        <a href="{{ path(module ~ '.index') }}" class="btn btn-lg btn-default">{{ 'cancel'|trans }}</a>
+    </div>
+    <div class="pull-right text-right col-sm-8">
+        {{ form_widget(form.apply, { 'label' : 'apply'|trans, 'attr' : {'class': 'btn btn-lg btn-primary'} } ) }}
+        {{ form_widget(form.save, { 'label' : 'save'|trans, 'attr' : {'class': 'btn btn-lg btn-success'} } ) }}
+    </div>
 </div>

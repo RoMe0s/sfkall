@@ -24,7 +24,8 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "jms/i18n-routing-bundle": "dev-master",
         "jms/translation-bundle": "dev-master",
-        "stof/doctrine-extensions-bundle": "^1.2"
+        "knplabs/doctrine-behaviors": "^1.4",
+        "a2lix/translation-form-bundle": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -1,13 +1,16 @@
 <?php
-namespace AdminBundle\Services;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 /**
  * Created by PhpStorm.
  * User: rome0s
  * Date: 2/9/17
  * Time: 1:23 PM
  */
-class TablesBuilder
+
+namespace AdminBundle\Services\TablesBuilder;
+
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+
+class TablesBuilderService
 {
     /**
      * @var null
@@ -24,7 +27,7 @@ class TablesBuilder
 
     /**
      * TablesBuilder constructor.
-     * @param ContainerInterface $container
+     * @param EngineInterface $templating
      */
     function __construct(EngineInterface $templating)
     {
@@ -78,11 +81,11 @@ class TablesBuilder
 
             if(is_callable($content)) {
 
-                $item->{'set' . $field}($content($item));
+                $item->{'set' . ucfirst($field)}($content($item));
 
             } else {
 
-                $item->{'set' . $field}($content);
+                $item->{'set' . ucfirst($field)}($content);
 
             }
 

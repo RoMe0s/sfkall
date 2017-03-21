@@ -14,8 +14,8 @@
                     SF
                 </div>
             </li>
-            <li {% if path('pages') == app.request.pathInfo %} class="active" {% endif %}>
-                <a href="{{ path('pages') }}">
+            <li {% if path('page.index') == app.request.pathInfo %} class="active" {% endif %}>
+                <a href="{{ path('page.index') }}">
                     <i class="fa fa-file-o"></i>
                     <span class="nav-label">
                         {{ 'Pages'|trans }}

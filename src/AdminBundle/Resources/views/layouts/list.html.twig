@@ -11,7 +11,9 @@
     <script src="{{ asset('bundles/admin/js/plugins/dataTables/datatables.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('.dataTables').DataTable();
+            $('.dataTables').DataTable({
+                responsive: true
+            });
         });
     </script>
 {% endblock %}
