@@ -1,0 +1,13 @@
+page.index:
+    path:     /pages
+    defaults: { _controller: ContentBundle:Page:index }
+    requirements:
+        _method: GET
+
+page.edit:
+    path:   /pages/{id}/edit
+    defaults: { _controller: ContentBundle:Page:edit }
+
+page.create:
+    path:     /pages/create
+    defaults: { _controller: ContentBundle:Page:create }

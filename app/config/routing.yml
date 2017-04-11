@@ -1,7 +1,3 @@
-auth:
-    resource: "@AuthBundle/Resources/config/routing.yml"
-    prefix:   /
-
 front:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /

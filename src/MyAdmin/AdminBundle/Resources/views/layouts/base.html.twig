@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    {% include '@AdminBundle/Resources/views/partials/styles.html.twig' %}
+</head>
+
+<body>
+<div id="wrapper">
+    {#Side bar#}
+    {% include '@AdminBundle/Resources/views/partials/sidebar.html.twig' %}
+    {#End side bar#}
+    <div id="page-wrapper" class="gray-bg">
+        {#Top bar#}
+        {% include '@AdminBundle/Resources/views/partials/topbar.html.twig' %}
+        {#End top bar#}
+            {% block body %}
+            {% endblock %}
+        {% include '@AdminBundle/Resources/views/partials/footer.html.twig' %}
+    </div>
+</div>
+    {% include '@AdminBundle/Resources/views/partials/scripts.html.twig' %}
+</body>
+</html>

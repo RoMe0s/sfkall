@@ -1,5 +1,0 @@
-services:
-  TablesBuilder:
-      class: AdminBundle\Services\TablesBuilder\TablesBuilderService
-      arguments: ['@templating']
-

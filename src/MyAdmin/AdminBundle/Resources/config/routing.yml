@@ -1,0 +1,20 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Default:index }
+    requirements:
+        _method: GET
+
+content:
+    resource: "@ContentBundle/Resources/config/routing.yml"
+    prefix: /
+
+admin_login:
+    path: /login
+    defaults: { _controller: AuthBundle:Admin:login }
+
+admin_login_check:
+    path: /login_check
+
+admin_logout:
+    path: /logout
+

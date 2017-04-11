@@ -1,0 +1,12 @@
+services:
+    app.twig_extension:
+        class: MyAdmin\WidgetBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    app.widget_view_listener:
+        class: MyAdmin\WidgetBundle\EventListener\ViewListener
+        arguments: ['@templating']
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
