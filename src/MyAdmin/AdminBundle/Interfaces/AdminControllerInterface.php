@@ -40,22 +40,12 @@ interface AdminControllerInterface
     public function deleteAction(int $id);
 
     /**
-     * @return mixed
-     */
-    public function _fillIndexData();
-
-    /**
-     * @return mixed
-     */
-    public function _fillSaveData();
-
-    /**
-     * @param $model
      * @param Request $request
+     * @param $model
      * @param array $data
      * @return mixed
      */
-    public function _callSaver($model, Request $request, array $data = array());
+    public function _callSaver(Request $request, $model, array $data = array());
 
     /**
      * @param Form $form
@@ -88,9 +78,9 @@ interface AdminControllerInterface
 
 
     /*
-------------------------------------------
-    END SYSTEM PART (DON'T REMOVE IT!) //SEE AdminControllerTrait
-------------------------------------------
- */
+    ------------------------------------------
+        END SYSTEM PART (DON'T REMOVE IT!) //SEE AdminControllerTrait
+    ------------------------------------------
+     */
 
 }

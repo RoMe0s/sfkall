@@ -2,14 +2,14 @@
 
 namespace MyAdmin\ContentBundle\Controller;
 
-use MyAdmin\AdminBundle\Classes\AbstractController;
+use MyAdmin\AdminBundle\Classes\AdminAbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class PageController
  * @package MyAdmin\ContentBundle\Controller
  */
-class PageController extends AbstractController
+class PageController extends AdminAbstractController
 {
 
     /**
@@ -17,16 +17,11 @@ class PageController extends AbstractController
      */
     protected $module = 'page';
 
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexAction(Request $request)
+    public function _fillIndexData(Request $request)
     {
-
         $repository = $this->getDoctrine()->getRepository($this->entityName); //get repository
 
-        $data = $repository->getFullList($request->getLocale()); //get data with translations
+        $data = $repository->getFullListWithTranslations($request->getLocale()); //get data with translations
 
         $tb = $this->get('TablesBuilder'); //init tables builder
 
@@ -54,26 +49,22 @@ class PageController extends AbstractController
             })
             ->make(); //build custom table
 
-        return $this->render($this->_bundle . ':' . $this->module . ':index.html.twig', array(
-            'list' => $list
-        ));
+        $this->passData('list', $list);
     }
 
-    /**
-     * @param int $id
-     * @param Request $request
-     * @return mixed
-     */
-    public function editAction(int $id, Request $request)
+    public function _fillFormType(Request $request, $model)
     {
 
-        $repository = $this->getDoctrine()->getRepository($this->entityName); //get repository
+        $data = [
+            'templates' => [
+                '1',
+                '2',
+                '3'
+            ]
+        ];
 
-        $entity = $repository->findWithTranslations($id);
-
-        return $this->_callSaver($entity, $request);
+        return $data;
 
     }
-
 
 }

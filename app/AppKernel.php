@@ -25,7 +25,7 @@ class AppKernel extends Kernel
             //end translatable
             //admin bundles
             new MyAdmin\AdminBundle\AdminBundle(),
-            new MyAdmin\AuthBundle\AuthBundle(),
+            new AuthBundle\AuthBundle(),
             new MyAdmin\ContentBundle\ContentBundle(),
             new MyAdmin\WidgetBundle\WidgetBundle(),
             //end admin bundles

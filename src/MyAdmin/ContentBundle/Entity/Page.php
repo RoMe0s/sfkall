@@ -4,8 +4,8 @@ namespace MyAdmin\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
-use MyAdmin\AdminBundle\Traits\Entity\TranslationMagicTrait as TMT;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use MyAdmin\AdminBundle\Classes\AdminAbstractEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -17,11 +17,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity("slug")
  */
-class Page
+class Page extends AdminAbstractEntity
 {
 
     use ORMBehaviors\Translatable\Translatable;
-    use TMT;
 
     /**
      * @Assert\Valid
@@ -292,7 +291,11 @@ class Page
         return $this->template;
     }
 
-
+    /**
+     * Return url
+     *
+     * @return string
+     */
     public function showAction() {
 
         return '/pages/' . $this->slug;

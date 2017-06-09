@@ -1,0 +1,31 @@
+#ADMIN AUTH
+admin_login:
+    path: /admin/login
+    defaults: { _controller: AuthBundle:Admin:login }
+    options: { i18n: false }
+
+admin_login_check:
+    path: /admin/login_check
+    options: { i18n: false }
+
+admin_logout:
+    path: /admin/logout
+    options: { i18n: false }
+
+#USER AUTH
+login:
+    path:     /login
+    defaults: { _controller: AuthBundle:Default:login }
+
+register:
+    path:     /register
+    defaults: { _controller: AuthBundle:Default:register }
+
+login_check:
+    path:     /login_check
+    options: { i18n: false }
+
+logout:
+    path:     /logout
+    defaults: { _controller: AuthBundle:Default:logout }
+    options: { i18n: false }

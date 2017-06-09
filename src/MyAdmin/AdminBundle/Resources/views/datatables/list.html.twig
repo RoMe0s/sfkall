@@ -17,6 +17,13 @@
             {% endfor %}
             </tr>
         {% endfor %}
+        {% if list|length == 0 %}
+            <tr>
+                <td class="text-center" colspan={{ fields|length  }}>
+                    <h4>{{ 'empty'|trans }}</h4>    
+                </td>
+            </tr>
+        {% endif %}
         </tbody>
 {#        <tfoot>
         <tr>

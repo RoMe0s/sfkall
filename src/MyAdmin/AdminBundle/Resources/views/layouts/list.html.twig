@@ -4,16 +4,3 @@
     {{ parent() }}
     <link href="{{ asset('bundles/admin/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('bundles/admin/js/plugins/jeditable/jquery.jeditable.js') }}"></script>
-    <script src="{{ asset('bundles/admin/js/plugins/dataTables/datatables.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.dataTables').DataTable({
-                responsive: true
-            });
-        });
-    </script>
-{% endblock %}

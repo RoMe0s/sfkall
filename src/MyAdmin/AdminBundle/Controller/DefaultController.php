@@ -2,11 +2,11 @@
 
 namespace MyAdmin\AdminBundle\Controller;
 
-use MyAdmin\AdminBundle\Classes\AbstractController;
+use MyAdmin\AdminBundle\Classes\AdminAbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class DefaultController extends AbstractController
+class DefaultController extends AdminAbstractController
 {
 
     public function deleteAction(int $id)
