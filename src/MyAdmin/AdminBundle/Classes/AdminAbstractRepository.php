@@ -21,6 +21,11 @@ abstract class AdminAbstractRepository extends EntityRepository implements Admin
     public $findMethod = "find";
 
     /**
+     * @var string
+     */
+    public $listFindMethod = "getFullListWithTranslations";
+
+    /**
      * @var mixed
      */
     public $query;

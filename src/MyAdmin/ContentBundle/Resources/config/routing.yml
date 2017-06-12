@@ -11,3 +11,9 @@ page.edit:
 page.create:
     path:     /pages/create
     defaults: { _controller: ContentBundle:Page:create }
+
+page.delete:
+    path: /pages/{id}
+    defaults: { _controller: ContentBundle:Page:delete }
+    requirements:
+        _method: DELETE

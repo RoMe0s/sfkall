@@ -1,16 +1,16 @@
 'use strict';
 
-import dt from 'datatables';
-$.fn.DataTable = dt;
+import DataTable from 'datatables';
 
 export default class DataTableInit {
 
     constructor() {
+
+        DataTable();
     
         $('.dataTables').DataTable({
             responsive: true
         });
-
     
     }
 

@@ -21,3 +21,46 @@ if(! function_exists('dd')) {
         die(1);
     }
 }
+
+if(! function_exists('default_locale')) {
+
+    /**
+     * @return string
+     */
+    function default_locale() {
+
+        return "ru";
+
+    }
+
+}
+
+if(! function_exists('get_translator')) {
+
+    /**
+     * @param string $locale
+     * @return \Symfony\Component\Translation\Translator
+     */
+    function get_translator(string $locale = "") {
+
+        $locale = !empty($locale) ? $locale : default_locale();
+
+        $path = __DIR__ . "/../src/MyAdmin/AdminBundle/Resources/translations/messages." . $locale . ".yml";
+
+        if(!file_exists($path)) {
+
+            throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException($path . " - file not found");
+
+        }
+
+        $translator = new \Symfony\Component\Translation\Translator($locale);
+
+        $translator->addLoader("yaml", new \Symfony\Component\Translation\Loader\YamlFileLoader());
+
+        $translator->addResource("yaml", $path, $locale);
+
+        return $translator;
+
+    }
+
+}

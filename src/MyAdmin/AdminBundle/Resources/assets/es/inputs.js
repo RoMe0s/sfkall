@@ -1,6 +1,7 @@
 'use strict';
 
 import 'select2';
+import 'icheck';
 
 export default class Inputs {
 
@@ -9,6 +10,8 @@ export default class Inputs {
         this.select2();
 
         this.datePicker();
+
+        this.icheck();
             
     }
 
@@ -30,6 +33,15 @@ export default class Inputs {
             forceParse: false,
             calendarWeeks: true,
             autoclose: true
+        });
+
+    }
+
+    icheck() {
+
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
         });
 
     }

@@ -49,7 +49,7 @@ abstract class AdminAbstractController extends Controller implements AdminContro
 
         $this->_bundle = array_pop($match);
 
-        $this->entityName =  "MyAdmin\\$this->_bundle\\Entity\\" . ucfirst($this->module);
+        $this->entityName = "MyAdmin\\$this->_bundle\\Entity\\" . ucfirst($this->module);
 
     }
 
@@ -102,7 +102,19 @@ abstract class AdminAbstractController extends Controller implements AdminContro
 
         $repository = $this->getDoctrine()->getRepository($this->entityName); //get repository
 
-        $repository->remove($id);
+        $entity = $repository->{$repository->findMethod}($id);
+
+        if(!$entity) {
+
+            throw $this->createNotFoundException();
+
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($entity);
+
+        $em->flush();
 
         return $this->redirectToRoute($this->module . '.index');
 
@@ -130,9 +142,12 @@ abstract class AdminAbstractController extends Controller implements AdminContro
 
         }
 
+        $this->passData('form', $form->createView());
+
+        $this->passData('module', $this->module);
+
         return $this->render( "{$this->_bundle}:".$this->module . ":edit.html.twig", array(
-            'form' => $form->createView(),
-            'module' => $this->module,
+            'form' => $form->createView()
         ));
 
     }
@@ -169,8 +184,37 @@ abstract class AdminAbstractController extends Controller implements AdminContro
 
     /**
      * @param Request $request
+     * @param array $fields
      */
-    public function _fillIndexData(Request $request) {}
+    public function _fillIndexData(Request $request, array $fields = array()) {
+
+        if(sizeof($fields)) {
+
+            $repository = $this->getDoctrine()->getRepository($this->entityName); //get repository
+
+            $data = $repository->{$repository->listFindMethod}($request->getLocale()); //get data with translations
+
+            $TablesBuilder = $this->get('TablesBuilder'); //init tables builder
+
+            $this->passData('list', $this->_listInitialize($TablesBuilder, $data, $fields));
+
+        }
+
+    }
+
+    /**
+     * @param $TablesBuilder
+     * @param $data
+     * @param array $fields
+     * @return mixed
+     */
+    public function _listInitialize($TablesBuilder, $data, array $fields) {
+
+        return $TablesBuilder
+            ->of($data, $fields, $this->module)
+            ->make();
+
+    }
 
     /*
     ------------------------------------------

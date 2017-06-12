@@ -1,0 +1,17 @@
+<form class="inline" ajax method="PUT" action="{{ path(module ~ '.edit', { 'id' : item.id }) }}">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
+    <label>
+        <input type="checkbox" class="i-checks"
+               data-id="{{ item.id }}"
+               data-module="{{ module }}"
+               data-off="{{ "off"|trans }}"
+               data-on="{{ "on"|trans }}"
+               {% if value == true %} checked {% endif %}
+        >
+        {% if value == true %}
+            {{ "on"|trans }}
+        {% else %}
+            {{ "off"|trans }}
+        {% endif %}
+    </label>
+</form>

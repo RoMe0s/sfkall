@@ -6,6 +6,6 @@ id: ID
 Pages: Страницы
 title: Заголовок
 Log out: Выход,
-status.no: Выключен
-status.yes: Включен
+off: Выключен
+on: Включен
 status: Статус

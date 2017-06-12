@@ -57,7 +57,9 @@ var getAdminNodeModules = {
               './node_modules/font-awesome/css/font-awesome.min.css',
               './node_modules/animate.css/animate.min.css',
               './node_modules/datatables/media/css/jquery.dataTables.min.css',
-              './node_modules/tinymce/**'
+              './node_modules/sweetalert/dist/sweetalert.css',
+              './node_modules/icheck/skins/**/*',
+              './node_modules/normalize.css/normalize.css'
           ],
           'destination': getDestination('node_modules')
       }

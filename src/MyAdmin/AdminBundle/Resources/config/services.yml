@@ -1,5 +1,13 @@
 services:
-  TablesBuilder:
-      class: MyAdmin\AdminBundle\Services\TablesBuilder\TablesBuilderService
-      arguments: ['@templating']
+  DefaultValueDriver:
+      class: MyAdmin\AdminBundle\Annotation\Driver\DefaultValueDriver
+      arguments: ['@annotation_reader']
 
+  TablesBuilder:
+      class: MyAdmin\AdminBundle\Services\TablesBuilderService
+      arguments: ['@templating', '@DefaultValueDriver']
+
+  app.exception_listener:
+      class: MyAdmin\AdminBundle\EventListener\ExceptionListener
+      tags:
+          - { name: kernel.event_listener, event: kernel.exception }

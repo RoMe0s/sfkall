@@ -1,11 +1,21 @@
-    <a class="btn btn-primary" href="{{ path(module ~ '.edit', { 'id' : model.id }) }}">
-        <i class="fa fa-edit"></i>
+{% if edit is defined and edit is not null and edit == true %}
+<a class="btn btn-primary" href="{{ path(module ~ '.edit', { 'id' : item.id }) }}">
+    <i class="fa fa-edit"></i>
+</a>
+{% endif %}
+{% if delete is defined and delete is not null and delete == true %}
+<form class="initial" method="DELETE" action="{{ path(module ~ '.delete', { 'id' : item.id }) }}" ajax postAjax="row-deleted" data-table>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
+    <a class="btn btn-danger"
+       data-alert="remove"
+       data-form
+    >
+    <i class="fa fa-trash-o"></i>
     </a>
-    <a class="btn btn-danger">
-        <i class="fa fa-trash-o"></i>
-    </a>
-    {% if link is defined and link is not null  %}
-    <a class="btn btn-info" href="{{ model.showAction() }}" target="_blank">
-        <i class="fa fa-external-link"></i>
-    </a>
-    {% endif %}
+</form>
+{% endif %}
+{% if link is defined and link is not null and link == true %}
+<a class="btn btn-info" href="{{ item.showAction() }}" target="_blank">
+    <i class="fa fa-external-link"></i>
+</a>
+{% endif %}

@@ -32,7 +32,7 @@ class ViewListener
 
     public function onKernelView(GetResponseForControllerResultEvent $event) {
 
-        die('here');
+        die('onKernelView');
 
         $val = $event->getControllerResult();
 

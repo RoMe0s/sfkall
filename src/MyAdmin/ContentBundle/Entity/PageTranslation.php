@@ -5,6 +5,7 @@ namespace MyAdmin\ContentBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
+use MyAdmin\AdminBundle\Annotation\DefaultValue;
 
 /**
  * PageTranslation
@@ -21,6 +22,7 @@ class PageTranslation
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\Type("string")
      * @Assert\NotNull
+     * @DefaultValue("no")
      */
     private $title;
 

@@ -8,6 +8,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use MyAdmin\AdminBundle\Classes\AdminAbstractEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use MyAdmin\AdminBundle\Annotation\DataTableEntities;
 
 /**
  * Page
@@ -16,6 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="MyAdmin\ContentBundle\Repository\PageRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity("slug")
+ * @DataTableEntities({"PageTranslation"})
  */
 class Page extends AdminAbstractEntity
 {
